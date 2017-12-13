@@ -1,0 +1,48 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="ivy-dependency-analyzer" default="run">
+    
+    <property name="lib.dir value="lib"/>
+    <property name="build.dir value="build"/>
+	<property name="src.dir value="src"/>
+    
+	<path id="lib.path.id">
+		<fileset dir="${lib.dir}">
+	</path>
+
+	<path id="run.path.id">
+		<path refid="lib.path.id"/>
+		<path location="${build.dir}"/>
+	</path>	
+	
+    <!-- ================================= 
+          target: convert-pom-to-ivy              
+         ================================= -->
+    <target name="convert-pom-to-ivy" description="--> convert pom.xml to ivy.xml">
+        <ivy:convertpom pomFile="pom.xml" ivyFile="ivy.xml" />
+    </target>
+	
+	
+    <!-- ================================= 
+          target: dependency-tree              
+         ================================= -->
+    <target name="dependency-tree" description="--> generate tree structure of dependencies">
+        <ivy:resolve file="ivy.xml" transitive="true" />
+    </target>
+	
+	<!-- ================================= 
+          target: generate-dot              
+         ================================= -->
+    <target name="generate-dot" description="--> generates graphical representation of dependencies">
+        <ivy:retrieve dot="true" graph="false" xsl="false" todir="${build.dir}" />
+    </target>
+	
+	
+    <!-- ================================= 
+          target: clean-cache              
+         ================================= -->
+    <target name="clean-cache" description="--> clean-cache">
+        <ivy:resolve>
+			<dependency org="org.slf4j" module="slf4j" rev="1.6 conf="api,log4j" />
+		</ivy:resolve>
+    </target>
+	
+</project>

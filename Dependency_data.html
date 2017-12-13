@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Dependency Data</title>
+	</head>
+	<body>
+		<h1>Dependency Graph</h1>
+		<div align=right>
+		<script src="../../../software/viz-js/viz.js"></script>
+		<script src="./inputData.gv"></script>
+		<script>document.body.innerHTML +=Viz(document.body.innerHTML = inputData);</script>
+		</div>
+		<h1>Dependency Tree</h1>
+		<div align=left>
+		<iframe src="tree.txt" width=1000 height=400 frameborder=0></iframe>
+		</div>
+	</body>
+</html>
